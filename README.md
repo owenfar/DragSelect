@@ -7,30 +7,6 @@
                  /____/                              
 ```
 
-# Installation
-## easy
-
-Just [download the file](https://github.com/ThibaultJanBeyer/DragSelect/blob/master/docs/DragSelect.js) ([minified](https://github.com/ThibaultJanBeyer/DragSelect/blob/master/docs/ds.min.js)) and add it to your document:
-
-```html
-<script src="https://thibaultjanbeyer.github.io/DragSelect/ds.min.js"></script>
-```
-
-*Note: if you are using `<script type=module` you can use the `DragSelect.es6m.js` or `ds.es6m.min.js` files as they include `export default DragSelect`*
-
-## npm
-```console
-npm install --save dragselect
-```
-
-## bower
-```console
-bower install --save dragselect
-```
-
-That's it, you're ready to rock!  
-Of course you can also just include the code within your code to save a request.  
-
 DragSelect supports `module.exports`, `AMD Modules` with `define` and has a fallback to global namespace for maximum out of the box support.
 
 # Usage
@@ -189,19 +165,3 @@ There are way more than listed here. You can find all in **[the docs](https://th
 |.ds-selectable |On elements that can be selected
 
 *note: you can change the class names setting the respective property on the constructor, see **[the docs](https://thibaultjanbeyer.github.io/DragSelect/DragSelect.html)** properties section.*
-
-# Have Fun!
-
-Creating and maintaining useful tools is a lot of work. 
-So don’t forget to give this repository a star if you find it useful.
-Star this repo, tell all your friends and start contributing or [donating 1$](https://paypal.me/pools/c/8gF2a5szCP) to keep it running. Thank you :)
-
-[![Typewriter Gif](https://thibaultjanbeyer.github.io/DragSelect/typewriter.gif)](http://thibaultjanbeyer.com/)
-
-
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-<br>
-<br>
-<br>
-
-[documentation](https://thibaultjanbeyer.github.io/DragSelect/DragSelect.html)
