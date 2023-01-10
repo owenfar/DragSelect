@@ -96,7 +96,7 @@ ds.start(); // reset the functionality after a teardown
 
 *You can also use the "shift", "ctrl" or "command" key to make multiple independent selections.*
 
-## Mobile/Touch useage
+## Mobile/Touch usage
 
 Keep in mind that using DragSelect on a mobile/touch device will also turn off the default scroll behaviour (on `click` + `drag` interaction).
 In 99% of the usecases, this is what you want. If DragSelect is only one part of a website, and you still want to be able to scroll the page on mobile, you can use an `area` [property](#properties). This way the scroll behaviour remains for all the rest of the page.
@@ -130,7 +130,7 @@ Here are some properties for your convenience (not all):
 |selectorClass |string |OPTIONAL. The class name assigned to the square selector helper. Default = [see classes](#classes) |
 |selectableClass |string |OPTIONAL. The class name assigned to the elements that can be selected. Default = [see classes](#classes) |
 |onDragStartBegin |function |OPTIONAL. Fired when the user clicks in the area. This callback gets the event object. Executed **before** DragSelect function code runs |
-|onDragStart |function |OPTIONAL. Fired when the user clicks in the area. This callback gets the event object. Executed after DragSelect function code ran, befor the setup of event listeners |
+|onDragStart |function |OPTIONAL. Fired when the user clicks in the area. This callback gets the event object. Executed after DragSelect function code ran, before the setup of event listeners |
 |onDragMove |function |OPTIONAL. Fired when the user drags. This callback gets the event object. Executed before DragSelect function code ran, after getting the current mouse position |
 |onDragEnd |function |OPTIONAL. Fired when the user ends drag interaction. This callback gets the event object. Executed after DragSelect function code ran |
 |onElementSelect |function |OPTIONAL. Fired every time an element is selected. This callback gets a property which is the selected node |
