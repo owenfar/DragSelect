@@ -1,3 +1,7 @@
+Version 1 is purely meant for drag selecting items - I will be keeping this up-to-date in this repo.
+
+All credits go to: https://github.com/ThibaultJanBeyer
+
 ```
     ____                   _____      __          __ 
    / __ \_________ _____ _/ ___/___  / /__  _____/ /_
