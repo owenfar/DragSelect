@@ -16,16 +16,13 @@
         return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
       };
     }
-
     return _typeof(obj);
   }
-
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
     }
   }
-
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
       var descriptor = props[i];
@@ -35,13 +32,11 @@
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
-
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
     return Constructor;
   }
-
   function _defineProperty(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -53,22 +48,17 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
   }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
     if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -77,15 +67,11 @@
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
@@ -103,6 +89,7 @@
   * @property {DSGenericInteractionCallbackEvent} [onDragMove=()=>{}] It is fired when the user drags. This callback gets the event object. Executed before DragSelect function code ran, after getting the current mouse position.
   * @property {DSGenericInteractionCallbackEvent} [onDragStartBegin=()=>{}] Is fired when the user clicks in the area. This callback gets the event object. Executed *before* DragSelect function code ran.
   * @property {DSGenericInteractionCallbackEvent} [onDragStart=()=>{}] It is fired when the user clicks in the area. This callback gets the event object. Executed after DragSelect function code ran, before the setup of event listeners.
+  * @property {DSGenericInteractionCallbackEvent} [onDragEnd=()=>{}] It is fired when the user ends drag interaction.
   * @property {DSInteractionCallbackEvent} [onElementSelect=()=>{}] It is fired every time an element is selected. This callback gets a property which is the just selected node
   * @property {DSInteractionCallbackEvent} [onElementUnselect=()=>{}] It is fired every time an element is de-selected. This callback gets a property which is the just de-selected node
   * @property {string} [selectableClass=ds-selectable] the class assigned to the elements that can be selected
@@ -112,28 +99,25 @@
   * @property {string} [selectorClass=ds-selector] the class assigned to the square selector helper
   * @property {string[]} [multiSelectKeys=['ctrlKey', 'shiftKey', 'metaKey']] An array of keys that allows switching to the multi-select mode (see the @multiSelectMode option). The only possible values are keys that are provided via the event object. So far: <kbd>ctrlKey</kbd>, <kbd>shiftKey</kbd>, <kbd>metaKey</kbd> and <kbd>altKey</kbd>. Provide an empty array `[]` if you want to turn off the functionality.
   */
-
   /**
    * @typedef {function} DSCallback
    * @param {Array<HTMLElement|SVGElement|any>} selected - The selected items
    * @param {MouseEvent|TouchEvent|Event} [event]
    * @return {*}
    */
-
   /**
    * @typedef {function} DSGenericInteractionCallbackEvent
    * @param {MouseEvent|TouchEvent|Event} [event]
    * @return {*}
    */
-
   /**
    * @typedef {function} DSInteractionCallbackEvent
    * @param {HTMLElement|SVGElement|any} item
    * @return {*}
    */
 
+  // Setup
   //////////////////////////////////////////////////////////////////////////////////////
-
   var DragSelect = /*#__PURE__*/function () {
     /** @type {boolean} */
 
@@ -158,92 +142,82 @@
      */
     function DragSelect(_ref) {
       var _this = this;
-
       var _ref$area = _ref.area,
-          area = _ref$area === void 0 ? document : _ref$area,
-          _ref$autoScrollSpeed = _ref.autoScrollSpeed,
-          autoScrollSpeed = _ref$autoScrollSpeed === void 0 ? 1 : _ref$autoScrollSpeed,
-          _ref$callback = _ref.callback,
-          callback = _ref$callback === void 0 ? function () {} : _ref$callback,
-          _ref$customStyles = _ref.customStyles,
-          customStyles = _ref$customStyles === void 0 ? false : _ref$customStyles,
-          _ref$hoverClass = _ref.hoverClass,
-          hoverClass = _ref$hoverClass === void 0 ? 'ds-hover' : _ref$hoverClass,
-          _ref$multiSelectKeys = _ref.multiSelectKeys,
-          multiSelectKeys = _ref$multiSelectKeys === void 0 ? ['ctrlKey', 'shiftKey', 'metaKey'] : _ref$multiSelectKeys,
-          _ref$multiSelectMode = _ref.multiSelectMode,
-          multiSelectMode = _ref$multiSelectMode === void 0 ? false : _ref$multiSelectMode,
-          _ref$onDragMove = _ref.onDragMove,
-          onDragMove = _ref$onDragMove === void 0 ? function () {} : _ref$onDragMove,
-          _ref$onDragStart = _ref.onDragStart,
-          onDragStart = _ref$onDragStart === void 0 ? function () {} : _ref$onDragStart,
-          _ref$onDragStartBegin = _ref.onDragStartBegin,
-          onDragStartBegin = _ref$onDragStartBegin === void 0 ? function () {} : _ref$onDragStartBegin,
-          _ref$onElementSelect = _ref.onElementSelect,
-          onElementSelect = _ref$onElementSelect === void 0 ? function () {} : _ref$onElementSelect,
-          _ref$onElementUnselec = _ref.onElementUnselect,
-          onElementUnselect = _ref$onElementUnselec === void 0 ? function () {} : _ref$onElementUnselec,
-          _ref$selectableClass = _ref.selectableClass,
-          selectableClass = _ref$selectableClass === void 0 ? 'ds-selectable' : _ref$selectableClass,
-          _ref$selectables = _ref.selectables,
-          selectables = _ref$selectables === void 0 ? [] : _ref$selectables,
-          _ref$selectedClass = _ref.selectedClass,
-          selectedClass = _ref$selectedClass === void 0 ? 'ds-selected' : _ref$selectedClass,
-          _ref$selector = _ref.selector,
-          selector = _ref$selector === void 0 ? undefined : _ref$selector,
-          _ref$selectorClass = _ref.selectorClass,
-          selectorClass = _ref$selectorClass === void 0 ? 'ds-selector' : _ref$selectorClass,
-          _ref$zoom = _ref.zoom,
-          zoom = _ref$zoom === void 0 ? 1 : _ref$zoom;
-
+        area = _ref$area === void 0 ? document : _ref$area,
+        _ref$autoScrollSpeed = _ref.autoScrollSpeed,
+        autoScrollSpeed = _ref$autoScrollSpeed === void 0 ? 1 : _ref$autoScrollSpeed,
+        _ref$callback = _ref.callback,
+        callback = _ref$callback === void 0 ? function () {} : _ref$callback,
+        _ref$customStyles = _ref.customStyles,
+        customStyles = _ref$customStyles === void 0 ? false : _ref$customStyles,
+        _ref$hoverClass = _ref.hoverClass,
+        hoverClass = _ref$hoverClass === void 0 ? 'ds-hover' : _ref$hoverClass,
+        _ref$multiSelectKeys = _ref.multiSelectKeys,
+        multiSelectKeys = _ref$multiSelectKeys === void 0 ? ['ctrlKey', 'shiftKey', 'metaKey'] : _ref$multiSelectKeys,
+        _ref$multiSelectMode = _ref.multiSelectMode,
+        multiSelectMode = _ref$multiSelectMode === void 0 ? false : _ref$multiSelectMode,
+        _ref$onDragMove = _ref.onDragMove,
+        onDragMove = _ref$onDragMove === void 0 ? function () {} : _ref$onDragMove,
+        _ref$onDragStart = _ref.onDragStart,
+        onDragStart = _ref$onDragStart === void 0 ? function () {} : _ref$onDragStart,
+        _ref$onDragStartBegin = _ref.onDragStartBegin,
+        onDragStartBegin = _ref$onDragStartBegin === void 0 ? function () {} : _ref$onDragStartBegin,
+        _ref$onDragEnd = _ref.onDragEnd,
+        onDragEnd = _ref$onDragEnd === void 0 ? function () {} : _ref$onDragEnd,
+        _ref$onElementSelect = _ref.onElementSelect,
+        onElementSelect = _ref$onElementSelect === void 0 ? function () {} : _ref$onElementSelect,
+        _ref$onElementUnselec = _ref.onElementUnselect,
+        onElementUnselect = _ref$onElementUnselec === void 0 ? function () {} : _ref$onElementUnselec,
+        _ref$selectableClass = _ref.selectableClass,
+        selectableClass = _ref$selectableClass === void 0 ? 'ds-selectable' : _ref$selectableClass,
+        _ref$selectables = _ref.selectables,
+        selectables = _ref$selectables === void 0 ? [] : _ref$selectables,
+        _ref$selectedClass = _ref.selectedClass,
+        selectedClass = _ref$selectedClass === void 0 ? 'ds-selected' : _ref$selectedClass,
+        _ref$selector = _ref.selector,
+        selector = _ref$selector === void 0 ? undefined : _ref$selector,
+        _ref$selectorClass = _ref.selectorClass,
+        selectorClass = _ref$selectorClass === void 0 ? 'ds-selector' : _ref$selectorClass,
+        _ref$zoom = _ref.zoom,
+        zoom = _ref$zoom === void 0 ? 1 : _ref$zoom;
       _classCallCheck(this, DragSelect);
-
       _defineProperty(this, "_multiSelectKeyPressed", false);
-
       _defineProperty(this, "_initialCursorPos", {
         x: 0,
         y: 0
       });
-
       _defineProperty(this, "_newCursorPos", {
         x: 0,
         y: 0
       });
-
       _defineProperty(this, "_previousCursorPos", {
         x: 0,
         y: 0
       });
-
       _defineProperty(this, "_initialScroll", {
         x: 0,
         y: 0
       });
-
       _defineProperty(this, "_selected", []);
-
       _defineProperty(this, "_prevSelected", []);
-
       _defineProperty(this, "_lastTouch", void 0);
-
       _defineProperty(this, "_autoScrollInterval", null);
-
+      _defineProperty(this, "_areaMaxScroll", {
+        width: 0,
+        height: 0
+      });
       _defineProperty(this, "_onClick", function (event) {
         return _this.handleClick(event);
       });
-
       _defineProperty(this, "_startUp", function (event) {
         return _this.startUp(event);
       });
-
       _defineProperty(this, "_handleMove", function (event) {
         return _this.handleMove(event);
       });
-
       _defineProperty(this, "_end", function (event) {
         return _this.reset(event, true);
       });
-
       this.selectedClass = selectedClass;
       this.hoverClass = hoverClass;
       this.selectorClass = selectorClass;
@@ -258,35 +232,35 @@
       this.onDragStartBegin = onDragStartBegin;
       this.moveStartCallback = onDragStart;
       this.moveCallback = onDragMove;
+      this.onDragEnd = onDragEnd;
       this.callback = callback;
       this.area = this._handleArea(area);
       this.customStyles = customStyles;
-      this.zoom = zoom; // Selector
+      this.zoom = zoom;
 
+      // Selector
       this.selector = selector || this._createSelector();
       this.selector.classList.add(this.selectorClass);
       this.start();
     }
+
     /**
      * @param {(HTMLElement|SVGElement|any)} area
      * @private
      */
-
-
     _createClass(DragSelect, [{
       key: "_handleArea",
       value: function _handleArea(area) {
-        if (area === document) return area; // Area has to have a special position attribute for calculations
+        if (area === document) return area;
 
+        // Area has to have a special position attribute for calculations
         var computedStyles = getComputedStyle(area);
         area.computedBorder = parseInt(computedStyles.borderWidth);
         var position = computedStyles.position;
         var isPositioned = position === 'absolute' || position === 'relative' || position === 'fixed';
-
         if (!isPositioned) {
           area.style.position = 'relative';
         }
-
         return area;
       }
       /**
@@ -296,14 +270,12 @@
        * @param {boolean} [fromSelection] - if elements should also be added/removed to the selection.
        * @private
        */
-
     }, {
       key: "_handleSelectables",
       value: function _handleSelectables(selectables, remove, fromSelection) {
         for (var index = 0; index < selectables.length; index++) {
           var selectable = selectables[index];
           var indexOf = this.selectables.indexOf(selectable);
-
           if (indexOf < 0 && !remove) {
             this._addSelectable(selectable, fromSelection);
           } else if (indexOf > -1 && remove) {
@@ -316,17 +288,16 @@
        * @param {boolean} toSelection also adds it to the current selection
        * @private
        */
-
     }, {
       key: "_addSelectable",
       value: function _addSelectable(selectable, toSelection) {
         selectable.classList.add(this.selectableClass);
         selectable.addEventListener('click', this._onClick);
-        this.selectables.push(selectable); // also add to current selection
+        this.selectables.push(selectable);
 
+        // also add to current selection
         if (toSelection && this._selected.indexOf(selectable) < 0) {
           selectable.classList.add(this.selectedClass);
-
           this._selected.push(selectable);
         }
       }
@@ -336,18 +307,17 @@
        * @param {boolean} [fromSelection] also adds it to the current selection
        * @private
        */
-
     }, {
       key: "_removeSelectable",
       value: function _removeSelectable(selectable, indexOf, fromSelection) {
         selectable.classList.remove(this.hoverClass);
         selectable.classList.remove(this.selectableClass);
         selectable.removeEventListener('click', this._onClick);
-        this.selectables.splice(indexOf, 1); // also remove from current selection
+        this.selectables.splice(indexOf, 1);
 
+        // also remove from current selection
         if (fromSelection && this._selected.indexOf(selectable) > -1) {
           selectable.classList.remove(this.selectedClass);
-
           this._selected.splice(this._selected.indexOf(selectable), 1);
         }
       }
@@ -355,10 +325,8 @@
        * @param {MouseEvent} event
        * @private
        */
-
     }, {
       key: "handleClick",
-
       /**
        * Triggers when a node is actively selected.
        *
@@ -373,16 +341,12 @@
         if (this.mouseInteraction) {
           return;
         } // fix firefox doubleclick issue
-
-
         if (this._isRightClick(event)) {
           return;
         }
+
         /** @type {any} */
-
-
         var node = event.target;
-
         if (this._isMultiSelectKeyPressed(event)) {
           this._prevSelected = this._selected.slice();
         } // #9
@@ -390,13 +354,11 @@
             this._prevSelected = [];
           } // #9
 
-
         this.checkIfInsideSelection(true); // reset selection if no multiselectionkeypressed
 
         if (this.selectables.indexOf(node) > -1) {
           this.toggle(node);
         }
-
         this._end(event);
       }
       /**
@@ -404,13 +366,11 @@
        * @return {HTMLElement}
        * @private
        */
-
     }, {
       key: "_createSelector",
       value: function _createSelector() {
         var selector = document.createElement('div');
         selector.style.position = 'absolute';
-
         if (!this.customStyles) {
           selector.style.background = 'rgba(0, 0, 255, 0.1)';
           selector.style.border = '1px solid rgba(0, 0, 255, 0.45)';
@@ -419,23 +379,18 @@
         }
 
         var _area = this.area === document ? document.body : this.area;
-
         _area.appendChild(selector);
-
         return selector;
       } // Start
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Starts the functionality. Automatically triggered when created.
        * Also, reset the functionality after a teardown
        */
-
     }, {
       key: "start",
       value: function start() {
         this._handleSelectables(this._initialSelectables);
-
         this.area.addEventListener('mousedown', this._startUp);
         this.area.addEventListener('touchstart', this._startUp, {
           passive: false
@@ -445,10 +400,8 @@
        * @param {Object} event - The event object.
        * @private
        */
-
     }, {
       key: "startUp",
-
       /**
        * Startup when the area is clicked.
        * @param {Object} event - The event object.
@@ -456,34 +409,42 @@
        */
       value: function startUp(event) {
         // touchmove handler
-        if (event.type === 'touchstart') // Call preventDefault() to prevent double click issue, see https://github.com/ThibaultJanBeyer/DragSelect/pull/29 & https://developer.mozilla.org/vi/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
+        if (event.type === 'touchstart')
+          // Call preventDefault() to prevent double click issue, see https://developer.mozilla.org/vi/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
           event.preventDefault();
         if (this._isRightClick(event)) return;
-        if (this._isScrollbarClick(event, this.area)) return; // callback
-
+        if (this._isScrollbarClick(event, this.area)) return;
+        // callback
         this.onDragStartBegin(event);
         if (this._breaked) return false;
         this.mouseInteraction = true;
         this.selector.style.display = 'block';
-        if (this._isMultiSelectKeyPressed(event)) this._prevSelected = this._selected.slice(); // #9
+        if (this._isMultiSelectKeyPressed(event)) this._prevSelected = this._selected.slice();
+        // #9
         else this._prevSelected = []; // #9
+
         // move element on location
-
         this._getStartingPositions(event);
-
         this.checkIfInsideSelection(true);
         this.selector.style.display = 'none'; // hidden unless moved, fix for issue #8
+
         // callback
-
         this.moveStartCallback(event);
-        if (this._breaked) return false; // event listeners
+        if (this._breaked) return false;
 
+        // set max scroll values
+        this._areaMaxScroll = {
+          width: this.area.scrollWidth,
+          height: this.area.scrollHeight
+        };
+
+        // event listeners
         this.area.removeEventListener('mousedown', this._startUp);
         this.area.removeEventListener('touchstart', this._startUp, {
           passive: false
         });
-        this.area.addEventListener('mousemove', this._handleMove);
-        this.area.addEventListener('touchmove', this._handleMove, {
+        document.addEventListener('mousemove', this._handleMove);
+        document.addEventListener('touchmove', this._handleMove, {
           passive: false
         });
         document.addEventListener('mouseup', this._end);
@@ -495,24 +456,20 @@
        * @return {boolean} this._isMultiSelectKeyPressed
        * @private
        */
-
     }, {
       key: "_isMultiSelectKeyPressed",
       value: function _isMultiSelectKeyPressed(event) {
         this._multiSelectKeyPressed = false;
-
         if (this.multiSelectMode) {
           this._multiSelectKeyPressed = true;
         } else {
           for (var index = 0; index < this.multiSelectKeys.length; index++) {
             var mKey = this.multiSelectKeys[index];
-
             if (event[mKey]) {
               this._multiSelectKeyPressed = true;
             }
           }
         }
-
         return this._multiSelectKeyPressed;
       }
       /**
@@ -520,7 +477,6 @@
        * @param {Object} event - The event object.
        * @private
        */
-
     }, {
       key: "_getStartingPositions",
       value: function _getStartingPositions(event) {
@@ -531,37 +487,33 @@
         selectorPos.y = this._initialCursorPos.y + this._initialScroll.y;
         selectorPos.w = 0;
         selectorPos.h = 0;
-
         this._updatePos(this.selector, selectorPos);
       } // Movements/Sizing of selection
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * @param {Object} event - The event object.
        * @private
        */
-
     }, {
       key: "handleMove",
-
       /**
        * Handles what happens while the mouse is moved
        * @param {Object} event - The event object.
        * @private
        */
       value: function handleMove(event) {
-        var selectorPos = this._getPosition(event); // callback
+        var selectorPos = this._getPosition(event);
 
-
+        // callback
         this.moveCallback(event);
         if (this._breaked) return false;
         this.selector.style.display = 'block'; // hidden unless moved, fix for issue #8
+
         // move element on location
-
         this._updatePos(this.selector, selectorPos);
+        this.checkIfInsideSelection(null);
 
-        this.checkIfInsideSelection(null); // scroll area if area is scrollable
-
+        // scroll area if area is scrollable
         this._setScrollState(event);
       }
       /**
@@ -570,21 +522,21 @@
        * @returns {{x:number,y:number,w:number,h:number}}
        * @private
        */
-
     }, {
       key: "_getPosition",
       value: function _getPosition(event) {
         var cursorPosNew = this._getCursorPos(this.area, event);
+        var scrollNew = this._getScroll(this.area);
 
-        var scrollNew = this._getScroll(this.area); // save for later retrieval
+        // save for later retrieval
+        this._newCursorPos = cursorPosNew;
 
-
-        this._newCursorPos = cursorPosNew; // if area or document is scrolled those values have to be included as well
-
+        // if area or document is scrolled those values have to be included as well
         var scrollAmount = {
           x: scrollNew.x - this._initialScroll.x,
           y: scrollNew.y - this._initialScroll.y
         };
+
         /** check for direction
          *
          * This is quite complicated math, so also quite complicated to explain. Lemme’ try:
@@ -626,67 +578,57 @@
          *
          * I hope that makes sense. Try stuff out and play around with variables to get a hang of it.
          */
+        var selectorPos = {};
 
-        var selectorPos = {}; // right
-
+        // right
         if (cursorPosNew.x > this._initialCursorPos.x - scrollAmount.x) {
           // 1.
           selectorPos.x = this._initialCursorPos.x + this._initialScroll.x; // 2.
-
           selectorPos.w = cursorPosNew.x - this._initialCursorPos.x + scrollAmount.x; // 3.
           // left
         } else {
           // 1b.
           selectorPos.x = cursorPosNew.x + scrollNew.x; // 2b.
-
           selectorPos.w = this._initialCursorPos.x - cursorPosNew.x - scrollAmount.x; // 3b.
-        } // bottom
+        }
 
-
+        // bottom
         if (cursorPosNew.y > this._initialCursorPos.y - scrollAmount.y) {
           selectorPos.y = this._initialCursorPos.y + this._initialScroll.y;
-          selectorPos.h = cursorPosNew.y - this._initialCursorPos.y + scrollAmount.y; // top
+          selectorPos.h = cursorPosNew.y - this._initialCursorPos.y + scrollAmount.y;
+          // top
         } else {
           selectorPos.y = cursorPosNew.y + scrollNew.y;
           selectorPos.h = this._initialCursorPos.y - cursorPosNew.y - scrollAmount.y;
         }
-
         return selectorPos;
       } // Colision detection
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Checks if any selectable element is inside selection.
        * @param {boolean} [force] forces through. Handles first clicks and accessibility. Here is user is clicking directly onto some element at start, (contrary to later hovers) we can assume that he really wants to select/deselect that item.
        * @return {boolean}
        */
-
     }, {
       key: "checkIfInsideSelection",
       value: function checkIfInsideSelection(force) {
         var anyInside = false;
-
         for (var i = 0, il = this.selectables.length; i < il; i++) {
           var selectable = this.selectables[i];
-
           var scroll = this._getScroll(this.area);
-
           var selectionRect = {
             y: this.selector.getBoundingClientRect().top / this.zoom + scroll.y,
             x: this.selector.getBoundingClientRect().left / this.zoom + scroll.x,
             h: this.selector.offsetHeight,
             w: this.selector.offsetWidth
           };
-
           if (this._isElementTouching(selectable, selectionRect, scroll)) {
             this._handleSelection(selectable, force);
-
             anyInside = true;
           } else {
             this._handleUnselection(selectable, force);
           }
         }
-
         return anyInside;
       }
       /**
@@ -695,22 +637,18 @@
        * @param {boolean} [force] forces through.
        * @private
        */
-
     }, {
       key: "_handleSelection",
       value: function _handleSelection(item, force) {
         if (item.classList.contains(this.hoverClass) && !force) {
           return false;
         }
-
         var posInSelectedArray = this._selected.indexOf(item);
-
         if (posInSelectedArray < 0) {
           this.select(item);
         } else if (posInSelectedArray > -1 && this._multiSelectKeyPressed) {
           this.unselect(item);
         }
-
         item.classList.add(this.hoverClass);
       }
       /**
@@ -719,16 +657,11 @@
        * @param {boolean} [force] forces through.
        * @private
        */
-
     }, {
       key: "_handleUnselection",
       value: function _handleUnselection(item, force) {
-        if (!item.classList.contains(this.hoverClass) && !force) {
-          return false;
-        }
-
+        if (!item.classList.contains(this.hoverClass) && !force) ;
         var posInSelectedArray = this._selected.indexOf(item);
-
         var isInPrevSelection = this._prevSelected.indexOf(item); // #9
 
         /**
@@ -738,14 +671,11 @@
          * = if item was selected and is not in selection anymore, reselect it
          * = if item was not selected and is not in selection anymore, unselect it
          */
-
-
         if (posInSelectedArray > -1 && isInPrevSelection < 0) {
           this.unselect(item);
         } else if (posInSelectedArray < 0 && isInPrevSelection > -1) {
           this.select(item);
         }
-
         item.classList.remove(this.hoverClass);
       }
       /**
@@ -753,14 +683,11 @@
        * @param {(HTMLElement|SVGElement)} item selected item.
        * @return {(HTMLElement|SVGElement|false)} item
        */
-
     }, {
       key: "select",
       value: function select(item) {
         if (this._selected.indexOf(item) > -1) return false;
-
         this._selected.push(item);
-
         item.classList.add(this.selectedClass);
         this.selectCallback(item);
         if (this._breaked) return false;
@@ -771,14 +698,11 @@
        * @param {(HTMLElement|SVGElement)} item selected item.
        * @return {(HTMLElement|SVGElement|false)} item
        */
-
     }, {
       key: "unselect",
       value: function unselect(item) {
         if (this._selected.indexOf(item) < 0) return false;
-
         this._selected.splice(this._selected.indexOf(item), 1);
-
         item.classList.remove(this.selectedClass);
         this.unselectCallback(item);
         if (this._breaked) return false;
@@ -790,7 +714,6 @@
        * @param {(HTMLElement|SVGElement)} item – item to select.
        * @return {(HTMLElement|SVGElement)} item
        */
-
     }, {
       key: "toggle",
       value: function toggle(item) {
@@ -799,7 +722,6 @@
         } else {
           this.select(item);
         }
-
         return item;
       }
       /**
@@ -816,7 +738,6 @@
        * @return {boolean}
        * @private
        */
-
     }, {
       key: "_isElementTouching",
       value: function _isElementTouching(element, selectionRect, scroll) {
@@ -826,7 +747,9 @@
           x: rect.left / this.zoom + scroll.x,
           h: rect.height / this.zoom,
           w: rect.width / this.zoom
-        }; // Axis-Aligned Bounding Box Colision Detection.
+        };
+
+        // Axis-Aligned Bounding Box Colision Detection.
         // Imagine following Example:
         //    b01
         // a01[1]a02
@@ -839,7 +762,6 @@
         //& b01 < b12 (top border pos box1 smaller than bottom border pos box2)
         //& b02 > b11 (bottom border pos box1 larger than top border pos box2)
         // See: https://en.wikipedia.org/wiki/Minimum_bounding_box#Axis-aligned_minimum_bounding_box and https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-
         if (selectionRect.x < elementRect.x + elementRect.w && selectionRect.x + selectionRect.w > elementRect.x && selectionRect.y < elementRect.y + elementRect.h && selectionRect.h + selectionRect.y > elementRect.y) {
           return true; // collision detected!
         } else {
@@ -847,28 +769,22 @@
         }
       } // Autoscroll
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Creates an interval that autoscrolls while the cursor
        * is near the edge
        * @param {Object} event – event object.
        * @private
        */
-
     }, {
       key: "_setScrollState",
       value: function _setScrollState(event) {
         var _this2 = this;
-
         var edge = this.isCursorNearEdge(this.area, event);
-
         if (edge) {
           if (this._autoScrollInterval) window.clearInterval(this._autoScrollInterval);
           this._autoScrollInterval = window.setInterval(function () {
             _this2._updatePos(_this2.selector, _this2._getPosition(event));
-
             _this2.checkIfInsideSelection(null);
-
             _this2._autoScroll(edge);
           });
         } else if (!edge && this._autoScrollInterval) {
@@ -881,22 +797,31 @@
        * @param {('top'|'bottom'|'left'|'right'|false)} edge
        * @private
        */
-
     }, {
       key: "_autoScroll",
       value: function _autoScroll(edge) {
         var docEl = document && document.documentElement && document.documentElement.scrollTop && document.documentElement;
-
         var _area = this.area === document ? docEl || document.body : this.area;
-
+        var maxVerScrollReached = _area.clientHeight + _area.scrollTop >= this._areaMaxScroll.height;
+        var maxHorScrollReached = _area.clientWidth + _area.scrollLeft >= this._areaMaxScroll.width;
+        if (maxVerScrollReached) {
+          this.area.style.overflowY = "hidden";
+        } else {
+          this.area.style.overflowY = "scroll";
+        }
+        if (maxHorScrollReached) {
+          this.area.style.overflowX = "hidden";
+        } else {
+          this.area.style.overflowX = "scroll";
+        }
         if (edge === 'top' && _area.scrollTop > 0) {
-          _area.scrollTop -= 1 * this.autoScrollSpeed;
-        } else if (edge === 'bottom') {
-          _area.scrollTop += 1 * this.autoScrollSpeed;
+          _area.scrollTop -= this.autoScrollSpeed;
+        } else if (edge === 'bottom' && !maxVerScrollReached) {
+          _area.scrollTop += this.autoScrollSpeed;
         } else if (edge === 'left' && _area.scrollLeft > 0) {
-          _area.scrollLeft -= 1 * this.autoScrollSpeed;
-        } else if (edge === 'right') {
-          _area.scrollLeft += 1 * this.autoScrollSpeed;
+          _area.scrollLeft -= this.autoScrollSpeed;
+        } else if (edge === 'right' && !maxHorScrollReached) {
+          _area.scrollLeft += this.autoScrollSpeed;
         }
       }
       /**
@@ -905,7 +830,6 @@
        * @param {Object} [event] event object.
        * @return {('top'|'bottom'|'left'|'right'|false)}
        */
-
     }, {
       key: "isCursorNearEdge",
       value: function isCursorNearEdge(area, event) {
@@ -917,16 +841,12 @@
           area = _event;
           event = _area;
         }
-
         var cursorPosition = this._getCursorPos(area, event);
-
         var areaRect = this._getAreaRect(area);
-
         var tolerance = {
           x: Math.max(areaRect.width / 10, 30),
           y: Math.max(areaRect.height / 10, 30)
         };
-
         if (cursorPosition.y < tolerance.y) {
           return 'top';
         } else if (areaRect.height - cursorPosition.y < tolerance.y) {
@@ -936,21 +856,17 @@
         } else if (cursorPosition.x < tolerance.x) {
           return 'left';
         }
-
         return false;
       } // Ending
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Triggered on mouse click release (end of dragging a selection).
        * Calls the callback method & unbind functions.
        * @param {Object} event - The event object.
        * @private
        */
-
     }, {
       key: "reset",
-
       /**
        * Unbind functions i.e. when mouse click is released
        * @param {Object} [event] - The event object.
@@ -958,31 +874,35 @@
        */
       value: function reset(event, withCallback) {
         var _this3 = this;
-
         this._previousCursorPos = this._getCursorPos(this.area, event);
         document.removeEventListener('mouseup', this._end);
         document.removeEventListener('touchend', this._end);
-        this.area.removeEventListener('mousemove', this._handleMove);
-        this.area.removeEventListener('touchmove', this._handleMove, {
-          passive: false
-        });
+        document.removeEventListener('mousemove', this._handleMove);
+        document.removeEventListener('touchmove', this._handleMove);
         this.area.addEventListener('mousedown', this._startUp);
         this.area.addEventListener('touchstart', this._startUp, {
           passive: false
         });
+
+        // Reset overflow styles
+        this.area.style.removeProperty('overflow');
+        this.area.style.removeProperty('overflow-y');
+        this.area.style.removeProperty('overflow-x');
+
+        // callback
+        this.onDragEnd(event);
         if (withCallback) this.callback(this.getSelection(), event);
         if (this._breaked) return false;
         this.selector.style.width = '0';
         this.selector.style.height = '0';
         this.selector.style.display = 'none';
-
         if (this._autoScrollInterval) {
           window.clearInterval(this._autoScrollInterval);
           this._autoScrollInterval = null;
         }
-
         setTimeout(function () {
-          return (// debounce in order "onClick" to work
+          return (
+            // debounce in order "onClick" to work
             _this3.mouseInteraction = false
           );
         }, 100);
@@ -993,14 +913,13 @@
        * - Event listeners, callback calls and calculation will continue working
        * - Selector won’t display and will not select
        */
-
     }, {
       key: "break",
       value: function _break() {
         var _this4 = this;
-
         this._breaked = true;
-        setTimeout( // debounce the break should only break once instantly after call
+        setTimeout(
+        // debounce the break should only break once instantly after call
         function () {
           return _this4._breaked = false;
         }, 100);
@@ -1012,7 +931,6 @@
        * @param {boolean} [fromSelection=true] - if elements should also be added/removed to the selection.
        * @param {boolean} [withCallback] - if elements should also be added/removed to the selection.
        */
-
     }, {
       key: "stop",
       value: function stop() {
@@ -1026,16 +944,13 @@
         });
         document.removeEventListener('mouseup', this._end);
         document.removeEventListener('touchend', this._end);
-
         this._handleSelectables(_toConsumableArray(this.selectables), remove, fromSelection);
       } // Useful methods for the user
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Returns the current selected nodes
        * @return {Array.<(HTMLElement|SVGElement)>}
        */
-
     }, {
       key: "getSelection",
       value: function getSelection() {
@@ -1049,7 +964,6 @@
        * @param {boolean} [ignoreScroll] if true, the scroll will be ignored
        * @return {{x:number,y:number}} cursor { x/y }
        */
-
     }, {
       key: "getCursorPos",
       value: function getCursorPos(event, _area, ignoreScroll) {
@@ -1058,9 +972,7 @@
           y: 0
         };
         var area = _area || _area !== false && this.area;
-
         var pos = this._getCursorPos(area, event);
-
         var scroll = ignoreScroll ? {
           x: 0,
           y: 0
@@ -1080,25 +992,20 @@
        * @param {boolean} [dontAddToSelectables] - if element should not be added to the list of selectable nodes
        * @return {Array.<(HTMLElement|SVGElement)>} all selected nodes
        */
-
     }, {
       key: "addSelection",
       value: function addSelection(_nodes, triggerCallback, dontAddToSelectables) {
         var nodes = this._toArray(_nodes);
-
         for (var index = 0, il = nodes.length; index < il; index++) {
           var node = nodes[index];
           this.select(node);
         }
-
         if (!dontAddToSelectables) {
           this.addSelectables(nodes);
         }
-
         if (triggerCallback) {
           this.callback(this._selected);
         }
-
         return this._selected;
       }
       /**
@@ -1109,25 +1016,20 @@
        * @param {boolean} [removeFromSelectables] - if element should be removed from the list of selectable nodes
        * @return {Array} all selected nodes
        */
-
     }, {
       key: "removeSelection",
       value: function removeSelection(_nodes, triggerCallback, removeFromSelectables) {
         var nodes = this._toArray(_nodes);
-
         for (var index = 0, il = nodes.length; index < il; index++) {
           var node = nodes[index];
           this.unselect(node);
         }
-
         if (removeFromSelectables) {
           this.removeSelectables(nodes);
         }
-
         if (triggerCallback) {
           this.callback(this._selected);
         }
-
         return this._selected;
       }
       /**
@@ -1139,22 +1041,18 @@
        * @param {boolean} [special] - if true, it also removes selected elements from possible selectable nodes & don’t add them to selectables if they are not
        * @return {Array} all selected nodes
        */
-
     }, {
       key: "toggleSelection",
       value: function toggleSelection(_nodes, triggerCallback, special) {
         var nodes = this._toArray(_nodes);
-
         for (var index = 0, il = nodes.length; index < il; index++) {
           var node = nodes[index];
-
           if (this._selected.indexOf(node) < 0) {
             this.addSelection(node, triggerCallback, special);
           } else {
             this.removeSelection(node, triggerCallback, special);
           }
         }
-
         return this._selected;
       }
       /**
@@ -1165,7 +1063,6 @@
        * @param {boolean} [dontAddToSelectables] - if element should not be added to the list of selectable nodes
        * @return {Array.<(HTMLElement|SVGElement)>}
        */
-
     }, {
       key: "setSelection",
       value: function setSelection(_nodes, triggerCallback, dontAddToSelectables) {
@@ -1178,21 +1075,17 @@
        * @param {boolean} [triggerCallback] - if callback should be called
        * @return {Array.<(HTMLElement|SVGElement)>} this.selected, should be empty
        */
-
     }, {
       key: "clearSelection",
       value: function clearSelection(triggerCallback) {
         var selection = this._selected.slice();
-
         for (var index = 0, il = selection.length; index < il; index++) {
           var node = selection[index];
           this.unselect(node);
         }
-
         if (triggerCallback) {
           this.callback(this._selected);
         }
-
         return this._selected;
       }
       /**
@@ -1202,21 +1095,17 @@
        * @param {boolean} [addToSelection] if elements should also be added to current selection
        * @return {Array.<(HTMLElement|SVGElement)>} _nodes the added node(s)
        */
-
     }, {
       key: "addSelectables",
       value: function addSelectables(_nodes, addToSelection) {
         var nodes = this._toArray(_nodes);
-
         this._handleSelectables(nodes, false, addToSelection);
-
         return _nodes;
       }
       /**
        * Gets all nodes that can be selected
        * @return {Array.<(HTMLElement|SVGElement)>} this.selectables
        */
-
     }, {
       key: "getSelectables",
       value: function getSelectables() {
@@ -1231,7 +1120,6 @@
        * @param {boolean} [addToSelection] if elements should also be added to current selection
        * @return {Array.<(HTMLElement|SVGElement)>} nodes – the added node(s)
        */
-
     }, {
       key: "setSelectables",
       value: function setSelectables(nodes, removeFromSelection, addToSelection) {
@@ -1244,18 +1132,14 @@
        * @param {boolean} [removeFromSelection] if elements should also be removed from current selection
        * @return {Array.<(HTMLElement|SVGElement)>} _nodes – the removed node(s)
        */
-
     }, {
       key: "removeSelectables",
       value: function removeSelectables(_nodes, removeFromSelection) {
         var nodes = this._toArray(_nodes);
-
         this._handleSelectables(nodes, true, removeFromSelection);
-
         return _nodes;
       } // Helpers
       //////////////////////////////////////////////////////////////////////////////////////
-
       /**
        * Based on a click event object,
        * checks if the right mouse button was pressed.
@@ -1264,12 +1148,10 @@
        * @return {boolean}
        * @private
        */
-
     }, {
       key: "_isRightClick",
       value: function _isRightClick(event) {
         var isRightMB = false;
-
         if ('which' in event) {
           // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
           isRightMB = event.which === 3;
@@ -1277,7 +1159,6 @@
           // IE, Opera
           isRightMB = event.button === 2;
         }
-
         return isRightMB;
       }
       /**
@@ -1288,14 +1169,11 @@
        * @return {boolean}
        * @private
        */
-
     }, {
       key: "_isScrollbarClick",
       value: function _isScrollbarClick(event, area) {
         var cPos = this._getCursorPos(area, event);
-
         var areaRect = this._getAreaRect(area);
-
         var border = area.computedBorder || 0;
         if (areaRect.width + border <= cPos.x) return true;
         if (areaRect.height + border <= cPos.y) return true;
@@ -1308,18 +1186,15 @@
        * @return {array}
        * @private
        */
-
     }, {
       key: "_toArray",
       value: function _toArray(nodes) {
         if (!nodes) return [];
         if (!nodes.length && this._isElement(nodes)) return [nodes];
         var array = [];
-
         for (var i = nodes.length - 1; i >= 0; i--) {
           array[i] = nodes[i];
         }
-
         return array;
       }
       /**
@@ -1329,7 +1204,6 @@
        * @return {boolean}
        * @private
        */
-
     }, {
       key: "_isElement",
       value: function _isElement(node) {
@@ -1353,33 +1227,28 @@
        * @return {{x: number, y: number}} cursor X/Y
        * @private
        */
-
     }, {
       key: "_getCursorPos",
       value: function _getCursorPos(area, event) {
         if (!event) return {
           x: 0,
           y: 0
-        }; // touchend has not touches. so we take the last toucb if a touchevent, we need to store the positions on the prototype
+        };
 
+        // touchend has not touches. so we take the last toucb if a touchevent, we need to store the positions on the prototype
         if ('touches' in event && event.type !== 'touchend') {
           this._lastTouch = event;
-        } //if a touchevent, return the last touch rather than the regular event
+        }
+        //if a touchevent, return the last touch rather than the regular event
         // we need .touches[0] from that event instead
-
-
         event = 'touches' in event ? this._lastTouch.touches[0] : event;
         var cPos = {
           // event.clientX/Y fallback for <IE8
           x: event.pageX || event.clientX,
           y: event.pageY || event.clientY
         };
-
         var areaRect = this._getAreaRect(area || document);
-
         var docScroll = this._getScroll(); // needed when document is scrollable but area is not
-
-
         return {
           // if it’s constrained in an area the area should be subtracted calculate
           x: (cPos.x - areaRect.left - docScroll.x) / this.zoom,
@@ -1390,7 +1259,6 @@
        * Returns the starting/initial position of the cursor/selector
        * @return {{x:number,y:number}}
        */
-
     }, {
       key: "getInitialCursorPosition",
       value: function getInitialCursorPosition() {
@@ -1400,7 +1268,6 @@
        * Returns the last seen position of the cursor/selector
        * @return {{x:number,y:number}}
        */
-
     }, {
       key: "getCurrentCursorPosition",
       value: function getCurrentCursorPosition() {
@@ -1410,7 +1277,6 @@
        * Returns the previous position of the cursor/selector
        * @return {{x:number,y:number}}
        */
-
     }, {
       key: "getPreviousCursorPosition",
       value: function getPreviousCursorPosition() {
@@ -1423,7 +1289,6 @@
        * @param {boolean} [usePreviousCursorDifference]
        * @return {{x:number,y:number}}
        */
-
     }, {
       key: "getCursorPositionDifference",
       value: function getCursorPositionDifference(usePreviousCursorDifference) {
@@ -1441,7 +1306,6 @@
        * @return {{x:number,y:number}} scroll X/Y
        * @deprecated
        */
-
     }, {
       key: "getScroll",
       value: function getScroll(area) {
@@ -1454,7 +1318,6 @@
        * @param {(HTMLElement|SVGElement)} [area]
        * @return {{x:number,y:number}} scroll X/Y
        */
-
     }, {
       key: "_getScroll",
       value: function _getScroll(area) {
@@ -1477,7 +1340,6 @@
        * @returns {{top:number,left:number,bottom:number,right:number,width:number,height:number}}
        * @deprecated
        */
-
     }, {
       key: "getAreaRect",
       value: function getAreaRect(area) {
@@ -1491,7 +1353,6 @@
        * @param {HTMLElement|SVGElement|any} area
        * @returns {{top:number,left:number,bottom:number,right:number,width:number,height:number}}
        */
-
     }, {
       key: "_getAreaRect",
       value: function _getAreaRect(area) {
@@ -1509,7 +1370,6 @@
             height: size.y
           };
         }
-
         var rect = area.getBoundingClientRect();
         return {
           top: rect.top,
@@ -1528,7 +1388,6 @@
        * @return {(HTMLElement|SVGElement)}
        * @private
        */
-
     }, {
       key: "_updatePos",
       value: function _updatePos(node, pos) {
@@ -1539,7 +1398,6 @@
         return node;
       }
     }]);
-
     return DragSelect;
   }();
 

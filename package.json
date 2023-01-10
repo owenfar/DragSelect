@@ -51,7 +51,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ThibaultJanBeyer/DragSelect.git"
+    "url": "git+https://github.com/owenfar/DragSelect.git"
   },
   "keywords": [
     "drag",
@@ -64,7 +64,7 @@
   "author": "Thibault Jan Beyer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ThibaultJanBeyer/DragSelect/issues"
+    "url": "https://github.com/owenfar/DragSelect/issues"
   },
   "homepage": "https://ThibaultJanBeyer.com/"
 }

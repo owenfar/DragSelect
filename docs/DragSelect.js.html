@@ -51,7 +51,7 @@
 
  {*} {*} STAR THIS PLUGIN ON GITHUB: {*} {*}
 
- https://github.com/ThibaultJanBeyer/DragSelect
+ https://github.com/owenfar/DragSelect
  Please give it a like, this is what makes me happy :-)
  Thank You
 
@@ -62,7 +62,7 @@
  ******************************************
  Copyright (c) 2017 ThibaultJanBeyer
  web: http://www.thibaultjanbeyer.com/
- github: https://github.com/ThibaultJanBeyer/DragSelect
+ github: https://github.com/owenfar/DragSelect
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -326,7 +326,7 @@ class DragSelect {
   startUp(event) {
     // touchmove handler
     if (event.type === 'touchstart')
-      // Call preventDefault() to prevent double click issue, see https://github.com/ThibaultJanBeyer/DragSelect/pull/29 &amp; https://developer.mozilla.org/vi/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
+      // Call preventDefault() to prevent double click issue, see https://github.com/owenfar/DragSelect/pull/29 &amp; https://developer.mozilla.org/vi/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
       event.preventDefault();
 
     if (this._isRightClick(event)) return;
@@ -1243,7 +1243,7 @@ class DragSelect {
    * @deprecated
    */
   getScroll(area) {
-    console.warn('[DragSelect]: .getScroll is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/ThibaultJanBeyer/DragSelect')
+    console.warn('[DragSelect]: .getScroll is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/owenfar/DragSelect')
     return this._getScroll(area)
   }
 
@@ -1283,7 +1283,7 @@ class DragSelect {
    * @deprecated
    */
   getAreaRect(area) {
-    console.warn('[DragSelect]: .getAreaRect is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/ThibaultJanBeyer/DragSelect')
+    console.warn('[DragSelect]: .getAreaRect is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/owenfar/DragSelect')
     return this._getAreaRect(area)
   }
 

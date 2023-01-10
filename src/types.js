@@ -11,6 +11,7 @@
 * @property {DSGenericInteractionCallbackEvent} [onDragMove=()=>{}] It is fired when the user drags. This callback gets the event object. Executed before DragSelect function code ran, after getting the current mouse position.
 * @property {DSGenericInteractionCallbackEvent} [onDragStartBegin=()=>{}] Is fired when the user clicks in the area. This callback gets the event object. Executed *before* DragSelect function code ran.
 * @property {DSGenericInteractionCallbackEvent} [onDragStart=()=>{}] It is fired when the user clicks in the area. This callback gets the event object. Executed after DragSelect function code ran, before the setup of event listeners.
+* @property {DSGenericInteractionCallbackEvent} [onDragEnd=()=>{}] It is fired when the user ends drag interaction.
 * @property {DSInteractionCallbackEvent} [onElementSelect=()=>{}] It is fired every time an element is selected. This callback gets a property which is the just selected node
 * @property {DSInteractionCallbackEvent} [onElementUnselect=()=>{}] It is fired every time an element is de-selected. This callback gets a property which is the just de-selected node
 * @property {string} [selectableClass=ds-selectable] the class assigned to the elements that can be selected

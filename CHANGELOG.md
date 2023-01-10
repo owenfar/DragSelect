@@ -11,7 +11,7 @@
 
 # 1.14.0
 
-- Enhanced auto-scrolling. See PR [59](https://github.com/ThibaultJanBeyer/DragSelect/pull/59). Big thanks to [@slinhart](https://github.com/slinhart) for this addition <3
+- Enhanced auto-scrolling. See PR [59](https://github.com/owenfar/DragSelect/pull/59). Big thanks to [@slinhart](https://github.com/slinhart) for this addition <3
 
 # 1.13.3-5
 
@@ -30,15 +30,15 @@
 
 # 1.13.1
 
-- Quick-Fix for `zoom` issue. See PR [#42](https://github.com/ThibaultJanBeyer/DragSelect/pull/42)
+- Quick-Fix for `zoom` issue. See PR [#42](https://github.com/owenfar/DragSelect/pull/42)
 
 # 1.13.0
 
-- Add `zoom` value for use-cases with CSS scale transformations. Implemented in PR [#40](https://github.com/ThibaultJanBeyer/DragSelect/pull/40). Thanks to [@staradayev](https://github.com/staradayev) for your contribution!
+- Add `zoom` value for use-cases with CSS scale transformations. Implemented in PR [#40](https://github.com/owenfar/DragSelect/pull/40). Thanks to [@staradayev](https://github.com/staradayev) for your contribution!
 
 # 1.12.2
 
-- Keep selection when clicking on scrollbars. Fixes [#36](https://github.com/ThibaultJanBeyer/DragSelect/issues/36)
+- Keep selection when clicking on scrollbars. Fixes [#36](https://github.com/owenfar/DragSelect/issues/36)
 
 # 1.12.1
 
@@ -46,7 +46,7 @@
 
 # 1.12.0
 
-- Fix bugs related to the `stop()` functionality [#37](https://github.com/ThibaultJanBeyer/DragSelect/issues/37) and [#38](https://github.com/ThibaultJanBeyer/DragSelect/issues/38). Big thanks to [@Martin-Eckleben](https://github.com/Martin-Eckleben) for the contribution!
+- Fix bugs related to the `stop()` functionality [#37](https://github.com/owenfar/DragSelect/issues/37) and [#38](https://github.com/owenfar/DragSelect/issues/38). Big thanks to [@Martin-Eckleben](https://github.com/Martin-Eckleben) for the contribution!
 - - Note that `reset()` now only resets the tool while `resetWithCallback()` also triggers the callback.
 - Improve automatic tests
 - Add typechecking to tests
@@ -91,28 +91,28 @@ Usind Babel to transpile downwards to ES5. This should not result in any changes
 
 # 1.9.0
 
-- Fix non scrollable document element issue. See [#35](https://github.com/ThibaultJanBeyer/DragSelect/issues/35)
-- Added `onDragStartBegin` callback. Helpful for my friends at issue [#24](https://github.com/ThibaultJanBeyer/DragSelect/issues/24)
+- Fix non scrollable document element issue. See [#35](https://github.com/owenfar/DragSelect/issues/35)
+- Added `onDragStartBegin` callback. Helpful for my friends at issue [#24](https://github.com/owenfar/DragSelect/issues/24)
 - Increase performance by calculating the selection rectangle outside of the `_isElementTouching` function. Tested on 30.000 Nodes. The selection is still usable although a bit laggy on 30k nodes.
 - Rename `isElementTouching` to private `_isElementTouching`. You also have to pass a `selectionRect` as second argument now instead of just passing the container node. This is not considered a breaking change because that function was not exposed before.
 - Add prettier & eslint + prettify code
 
 # 1.8.1
 
-- add `setSelectables()` method. Based on request from @n1crack. See issue [#30](https://github.com/ThibaultJanBeyer/DragSelect/issues/30)
+- add `setSelectables()` method. Based on request from @n1crack. See issue [#30](https://github.com/owenfar/DragSelect/issues/30)
 - [local tests] replace manual `test3` with an automated test for constrained selection
 
 # 1.8.0
 
-- CSS Classes naming is now customizable. See PR [#27](https://github.com/ThibaultJanBeyer/DragSelect/pull/27). Thanks to [@ant1ucem](https://github.com/ant1ucem) for the contribution!
+- CSS Classes naming is now customizable. See PR [#27](https://github.com/owenfar/DragSelect/pull/27). Thanks to [@ant1ucem](https://github.com/ant1ucem) for the contribution!
 
 # 1.7.24
 
-- add `multiSelectMode` to set the multi-selection as default behavior. See [#19](https://github.com/ThibaultJanBeyer/DragSelect/issues/19). Thanks to [@riless](https://github.com/riless) for the contribution!
+- add `multiSelectMode` to set the multi-selection as default behavior. See [#19](https://github.com/owenfar/DragSelect/issues/19). Thanks to [@riless](https://github.com/riless) for the contribution!
 
 # 1.7.21-23
 
-- fix issue with getCursorPositionDifference for single clicks. See [#13](https://github.com/ThibaultJanBeyer/DragSelect/issues/13). Big thanks to [@RealTJ](https://github.com/RealTJ) for the help
+- fix issue with getCursorPositionDifference for single clicks. See [#13](https://github.com/owenfar/DragSelect/issues/13). Big thanks to [@RealTJ](https://github.com/RealTJ) for the help
 - ! getCursorPositionDifference now returns negative values when moving to the left and positive values when moving to the right (exact oposite as before). This is more consistent with the default behaviour on a X/Y axis.
 
 # 1.7.20
@@ -121,7 +121,7 @@ Usind Babel to transpile downwards to ES5. This should not result in any changes
 
 # 1.7.19
 
-- Solve issue [#10](https://github.com/ThibaultJanBeyer/DragSelect/issues/10)
+- Solve issue [#10](https://github.com/owenfar/DragSelect/issues/10)
 - Improve public .getCursorPos() method and made initial one private
 - Add more local tests representing different scenarios for proper manual testing
 
@@ -132,7 +132,7 @@ Usind Babel to transpile downwards to ES5. This should not result in any changes
 
 # 1.7.16 + 1.7.17
 
-- Fix selection algorithm issue reported in issue [#9](https://github.com/ThibaultJanBeyer/DragSelect/issues/9)
+- Fix selection algorithm issue reported in issue [#9](https://github.com/owenfar/DragSelect/issues/9)
 - Improve `.addSelection`, `.removeSelection` and `.setSelection` by adding a third option (see docs).
 
 # 1.7.15
