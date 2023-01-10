@@ -128,6 +128,7 @@ Here are some properties for your convenience (not all):
 |onDragStartBegin |function |OPTIONAL. Fired when the user clicks in the area. This callback gets the event object. Executed **before** DragSelect function code runs |
 |onDragStart |function |OPTIONAL. Fired when the user clicks in the area. This callback gets the event object. Executed after DragSelect function code ran, befor the setup of event listeners |
 |onDragMove |function |OPTIONAL. Fired when the user drags. This callback gets the event object. Executed before DragSelect function code ran, after getting the current mouse position |
+|onDragEnd |function |OPTIONAL. Fired when the user ends drag interaction. This callback gets the event object. Executed after DragSelect function code ran |
 |onElementSelect |function |OPTIONAL. Fired every time an element is selected. This callback gets a property which is the selected node |
 |onElementUnselect |function |OPTIONAL. Fired every time an element is de-selected. This callback gets a property which is the de-selected node |
 |callback |function |OPTIONAL. Callback function that gets fired when the selection is released. This callback gets a property which is an array that holds all selected nodes |

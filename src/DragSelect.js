@@ -75,7 +75,7 @@ class DragSelect {
      */
     constructor({
         area = document,
-        autoScrollSpeed = 1,
+        autoScrollSpeed = 3,
         callback = () => { },
         customStyles = false,
         hoverClass = 'ds-hover',
@@ -249,11 +249,12 @@ class DragSelect {
         var selector = document.createElement('div');
 
         selector.style.position = 'absolute';
+        selector.style.display = 'none';
+        selector.style.pointerEvents = 'none'; // fix for issue #8 (ie11+)
+
         if (!this.customStyles) {
             selector.style.background = 'rgba(0, 0, 255, 0.1)';
             selector.style.border = '1px solid rgba(0, 0, 255, 0.45)';
-            selector.style.display = 'none';
-            selector.style.pointerEvents = 'none'; // fix for issue #8 (ie11+)
         }
 
         var _area = this.area === document ? document.body : this.area;
@@ -749,15 +750,6 @@ class DragSelect {
      * @return {('top'|'bottom'|'left'|'right'|false)}
      */
     isCursorNearEdge(area, event) {
-        // @TODO DEPRECATION: remove support on next major release
-        if (typeof area === "object" && this._isElement(event)) {
-            console.warn("[DragSelect] DEPRECATION warning: this method signature is changing. From isCursorNearEdge(event, area) to isCursorNearEdge(area, event). Please use area as first argument and event as second. It will still work for now but functionality be removed soon")
-            const _event = event
-            const _area = area
-            area = _event
-            event = _area
-        }
-
         var cursorPosition = this._getCursorPos(area, event);
         var areaRect = this._getAreaRect(area);
 
@@ -1228,18 +1220,6 @@ class DragSelect {
      * If container has no scroll it will return 0
      * @param {(HTMLElement|SVGElement)} [area]
      * @return {{x:number,y:number}} scroll X/Y
-     * @deprecated
-     */
-    getScroll(area) {
-        console.warn('[DragSelect]: .getScroll is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/ThibaultJanBeyer/DragSelect')
-        return this._getScroll(area)
-    }
-
-    /**
-     * Returns the current x, y scroll value of a container
-     * If container has no scroll it will return 0
-     * @param {(HTMLElement|SVGElement)} [area]
-     * @return {{x:number,y:number}} scroll X/Y
      */
     _getScroll(area) {
         var body = {
@@ -1260,19 +1240,6 @@ class DragSelect {
         };
 
         return scroll;
-    }
-
-    /**
-     * Returns the top/left/bottom/right/width/height
-     * values of a node. If Area is document then everything
-     * except the sizes will be nulled.
-     * @param {HTMLElement|SVGElement|any} area
-     * @returns {{top:number,left:number,bottom:number,right:number,width:number,height:number}}
-     * @deprecated
-     */
-    getAreaRect(area) {
-        console.warn('[DragSelect]: .getAreaRect is being deprecated soon. Please do not use it any longer. If you have a real use-case for this, please let us know at https://github.com/ThibaultJanBeyer/DragSelect')
-        return this._getAreaRect(area)
     }
 
     /**
